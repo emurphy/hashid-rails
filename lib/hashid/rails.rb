@@ -61,4 +61,5 @@ module Hashid
 
 end
 
-ActiveRecord::Base.send :include, Hashid::Rails
+# opt-in only
+#ActiveRecord::Base.send :include, Hashid::Rails

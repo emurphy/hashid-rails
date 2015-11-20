@@ -69,6 +69,7 @@ describe Hashid::Rails do
 end
 
 class Model < ActiveRecord::Base
+  include Hashid::Rails
 
   def self.columns_hash
     {id: ActiveRecord::ConnectionAdapters::Column.new('id', nil, 'integer', 'integer')}
