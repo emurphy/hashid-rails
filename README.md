@@ -20,6 +20,15 @@ Or install it yourself as:
 
 ## Usage
 
+Model classes must opt-in to hashids by including the mixin module:
+
+```
+class Model < ActiveRecord::Base
+  include Hashid::Rails
+  ...
+end
+```
+
 Just use `Model#find` passing in the hashid instead of the model id:
 
 ```ruby
