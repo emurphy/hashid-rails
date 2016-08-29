@@ -72,7 +72,7 @@ class Model < ActiveRecord::Base
   include Hashid::Rails
 
   def self.columns_hash
-    {id: ActiveRecord::ConnectionAdapters::Column.new('id', nil, 'integer', 'integer')}
+    {id: ActiveRecord::ConnectionAdapters::Column.new('id', nil)}
   end
 
   def self.attributes_builder
@@ -96,15 +96,22 @@ class Model < ActiveRecord::Base
   end
 
   def self.connection
-    FakeConnection.new
+    FakeConnection.new(nil)
   end
 
 end
 
-class FakeConnection
+class FakeConnection < ActiveRecord::ConnectionAdapters::AbstractAdapter
 
-  def clear_query_cache
-
+  def columns(table)
+     Model.columns
   end
+
+  def data_sources
+     ['models']
+  end
+
+  alias_method :tables, :data_sources
+
 end
 
